@@ -19,4 +19,9 @@
     <string name="and_update"><![CDATA[& Update]]></string>
     <string name="back">Back To My City</string>
     <string name="back_to_list">Back To List</string>
+    <string name="all_schedule">look up all schedule</string>
+    <string name="date">0 Januari 2024</string>
+    <string name="day">day</string>
+    <string name="schedule">schedule</string>
+    <string name="your_activity_today">your activity today:</string>
 </resources>
