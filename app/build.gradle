@@ -15,7 +15,8 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        buildConfigField("String", "url", '"https://api.openweathermap.org/"')
+        buildConfigField("String", "APP_ID", '"7094d3991048d0bfc1407d35dee9a0a3"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,4 +49,22 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //api connect
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    //db
+    implementation 'androidx.room:room-ktx:2.4.2'
+    implementation 'androidx.room:room-common:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
+
+    //location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    //viewModel
+    implementation "androidx.activity:activity-ktx:1.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
 }
