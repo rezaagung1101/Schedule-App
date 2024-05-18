@@ -1,4 +1,8 @@
 package com.powerhouse.ai.weathertraining.model.database
 
-class ScheduleDao {
+import androidx.room.Dao
+
+@Dao
+interface ScheduleDao{
+
 }

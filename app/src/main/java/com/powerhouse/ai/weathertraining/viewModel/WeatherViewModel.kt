@@ -30,6 +30,10 @@ class WeatherViewModel(private val repository: WeatherRepository): ViewModel() {
         _longitude.value = longitude
     }
 
+    fun getCityWeatherDB(city: String): LiveData<WeatherRecord> {
+        return repository.getCityWeather(city)
+    }
+
     fun getWeatherReport(latitude: Double, longitude: Double, appId: String) =
         viewModelScope.launch {
             try {

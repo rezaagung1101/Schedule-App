@@ -1,4 +1,4 @@
-package com.powerhouse.ai.weathertraining
+package com.powerhouse.ai.weathertraining.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
