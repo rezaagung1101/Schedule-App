@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.view.View
@@ -89,8 +90,24 @@ class MainActivity : AppCompatActivity() {
                 isLoading.observe(this@MainActivity) {
                     showLoading(it)
                 }
+                getCurrentTime()
+                currentTime.observe(this@MainActivity){
+                    showCurrentTime(it)
+                }
             }
         }
+        binding.swipeRefresh.setOnRefreshListener {
+            setupInformation()
+            binding.swipeRefresh.isRefreshing = true
+            // Use a Handler to post a delayed action
+            Handler().postDelayed({
+                binding.swipeRefresh.isRefreshing = false
+            }, 1000)
+        }
+    }
+
+    private fun showCurrentTime(time: String) {
+        binding.tvTime.text = time
     }
 
     private fun setupInformation(weather: WeatherRecord) {
@@ -98,7 +115,6 @@ class MainActivity : AppCompatActivity() {
             preference.saveCurrentCity(weather.city)
             tvLocation.text = weather.city
             tvTemperature.text = resources.getString(R.string.temp_value, Helper.kelvinToCelcius(weather.temperature.toDouble()))
-            tvTime.text = Helper.currentTime(System.currentTimeMillis())
         }
     }
 

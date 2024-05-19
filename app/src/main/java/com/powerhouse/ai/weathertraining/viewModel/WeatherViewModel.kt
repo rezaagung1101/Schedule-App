@@ -1,5 +1,7 @@
 package com.powerhouse.ai.weathertraining.viewModel
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,22 +12,51 @@ import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.model.remote.repository.WeatherRepository
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-class WeatherViewModel(private val repository: WeatherRepository): ViewModel() {
+class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() {
     private var _latitude = MutableLiveData(0.0)
     val latitude: LiveData<Double> = _latitude
-    private var _longitude= MutableLiveData(0.0)
+    private var _longitude = MutableLiveData(0.0)
     val longitude: LiveData<Double> = _longitude
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
     private var _currentCity = MutableLiveData<String>()
     val currentCity: LiveData<String> = _currentCity
     private val _showNoInternetSnackbar = MutableLiveData<Boolean>()
+    private var _currentTime = MutableLiveData<String>()
+    val currentTime: LiveData<String> = _currentTime
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateTimeRunnable = object : Runnable {
+        override fun run() {
+            getCurrentTime()
+            handler.postDelayed(this, 1000) // Repeat every second
+        }
+    }
+
+    init {
+        startUpdatingTime()
+    }
+
+    private fun startUpdatingTime() {
+        handler.post(updateTimeRunnable)
+    }
+
+    private fun stopUpdatingTime() {
+        handler.removeCallbacks(updateTimeRunnable)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        stopUpdatingTime()
+    }
 
     val showNoInternetSnackbar: LiveData<Boolean>
         get() = _showNoInternetSnackbar
 
-    fun setLocation(latitude: Double, longitude: Double){
+    fun setLocation(latitude: Double, longitude: Double) {
         _latitude.value = latitude
         _longitude.value = longitude
     }
@@ -39,8 +70,8 @@ class WeatherViewModel(private val repository: WeatherRepository): ViewModel() {
             try {
                 _isLoading.value = true
                 repository.getCurrentWeather(latitude.toString(), longitude.toString(), appId)
-                    .let {response ->
-                        if(response.isSuccessful){
+                    .let { response ->
+                        if (response.isSuccessful) {
                             _currentCity.value = response.body()?.name.toString()
                             repository.insertWeather(
                                 WeatherRecord(
@@ -72,6 +103,12 @@ class WeatherViewModel(private val repository: WeatherRepository): ViewModel() {
 
     fun setSnackBarValue(status: Boolean) {
         _showNoInternetSnackbar.value = status
+    }
+
+    fun getCurrentTime() {
+        val currentTime = System.currentTimeMillis()
+        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        _currentTime.value = dateFormat.format(Date(currentTime))
     }
 
 }
