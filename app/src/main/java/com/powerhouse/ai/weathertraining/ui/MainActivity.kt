@@ -25,6 +25,7 @@ import com.powerhouse.ai.weathertraining.R
 import com.powerhouse.ai.weathertraining.databinding.ActivityMainBinding
 import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.model.remote.api.ApiConfig
+import com.powerhouse.ai.weathertraining.utils.UserPreference
 import com.powerhouse.ai.weathertraining.viewModel.WeatherViewModel
 import com.powerhouse.ai.weathertraining.viewModel.WeatherViewModelFactory
 
@@ -35,11 +36,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private val weatherViewModel: WeatherViewModel by viewModels()
+    private lateinit var preference: UserPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        preference = UserPreference(this)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getViewModel()
         locationCallback = object : LocationCallback() {
@@ -64,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 currentCity.observe(this@MainActivity){
                     getCityWeatherDB(it).observe(this@MainActivity){ weather ->
                         if(weather != null){
-//                            userPreference.saveCurrentCity(weather.city)
+                            preference.saveCurrentCity(weather.city)
                             setupInformation(weather)
                         }
                     }
@@ -78,9 +81,9 @@ class MainActivity : AppCompatActivity() {
                     if(showSnackbar){
                         Snackbar.make(binding.root, "No Internet Connection", Snackbar.LENGTH_SHORT).show()
                         weatherViewModel.setSnackBarValue(false)
-//                        getCityWeatherDB(userPreference.getCurrentCity()!!).observe(this@MainActivity){
-//                            setupInformation(it)
-//                        }
+                        getCityWeatherDB(preference.getCurrentCity()!!).observe(this@MainActivity){
+                            setupInformation(it)
+                        }
                     }
                 }
                 isLoading.observe(this@MainActivity) {
@@ -92,9 +95,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupInformation(weather: WeatherRecord) {
         binding.apply{
-//            userPreference.saveCurrentCity(weather.city)
+            preference.saveCurrentCity(weather.city)
             tvLocation.text = weather.city
             tvTemperature.text = resources.getString(R.string.temp_value, Helper.kelvinToCelcius(weather.temperature.toDouble()))
+            tvTime.text = Helper.currentTime(System.currentTimeMillis())
         }
     }
 

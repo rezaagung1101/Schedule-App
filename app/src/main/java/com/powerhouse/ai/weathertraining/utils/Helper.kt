@@ -12,13 +12,18 @@ object Helper {
 
     fun convertTimezoneToString(timezone: Int): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC") //specifically just for timezone
         // Calculate the timezone offset in milliseconds
         val offsetMillis = timezone * 1000L
         // Get the current time in UTC and apply the offset
         val currentTimeMillis = System.currentTimeMillis() + offsetMillis
         // Convert the time to a formatted string
         return dateFormat.format(Date(currentTimeMillis))
+    }
+
+    fun currentTime(time: Long): String{
+        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        return dateFormat.format(Date(time))
     }
 
     fun convertUnixTimeToAMPM(unixTime: Int): String {
