@@ -21,6 +21,11 @@ object Helper {
         return dateFormat.format(Date(currentTimeMillis))
     }
 
+    fun getTodaysDayName():String {
+        val dateFormat = SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
+        return dateFormat.format(Date())
+    }
+
     fun currentTime(time: Long): String{
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return dateFormat.format(Date(time))

@@ -117,6 +117,8 @@ class HomeFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = false
             }, 1000)
         }
+
+        binding.tvDay.text = Helper.getTodaysDayName()
     }
 
     private fun showCurrentTime(time: String) {
