@@ -1,6 +1,7 @@
 package com.powerhouse.ai.weathertraining.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,8 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.powerhouse.ai.weathertraining.R
 import com.powerhouse.ai.weathertraining.databinding.ActivityMainBinding
+import com.powerhouse.ai.weathertraining.utils.TimePickerFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TimePickerFragment.DialogTimeListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -34,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+    }
+
+    override fun onDialogTimeSet(tag: String?, hour: Int, minute: Int) {
+        Log.d("MainActivity_$tag", "Selected Date: $hour/$minute")
     }
 
 

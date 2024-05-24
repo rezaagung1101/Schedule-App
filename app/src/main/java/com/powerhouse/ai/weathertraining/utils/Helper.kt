@@ -26,6 +26,10 @@ object Helper {
         return dateFormat.format(Date())
     }
 
+    fun getFormatTime(hour: Int, minute: Int): String {
+        return String.format("%02d:%02d", hour, minute)
+    }
+
     fun currentTime(time: Long): String{
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return dateFormat.format(Date(time))
