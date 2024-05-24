@@ -17,9 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherTraining"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.AddScheduleActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true">

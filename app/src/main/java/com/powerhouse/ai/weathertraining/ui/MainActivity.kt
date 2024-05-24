@@ -15,20 +15,25 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        setSupportActionBar(binding.toolbar)
+//        supportActionBar?.title = ""
         val navView: BottomNavigationView = binding.bottomNavigationView
-        val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_add_schedule,
-                R.id.navigation_list_day_schedule
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        val navController = findNavController(R.id.nav_host_fragment_container)
+
+        //Untuk mengatur title di action bar
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_home,
+//                R.id.navigation_add_schedule,
+//                R.id.navigation_list_day_schedule,
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
 
