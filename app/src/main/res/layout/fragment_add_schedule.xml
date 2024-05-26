@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ed_layout_course"
+        android:id="@+id/et_layout_schedule"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="64dp"
         android:layout_marginHorizontal="@dimen/fab_margin"
         android:layout_marginTop="@dimen/fab_margin"
         android:hint="@string/schedule_name"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_course_name"
+            android:id="@+id/et_schedule_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="255"
@@ -49,7 +49,7 @@
         android:layout_marginTop="@dimen/fab_margin"
         app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_layout_course"
+        app:layout_constraintTop_toBottomOf="@+id/et_layout_schedule"
         app:strokeColor="@color/cardview_shadow_start_color">
 
         <Spinner
@@ -159,7 +159,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_note"
+            android:id="@+id/et_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"

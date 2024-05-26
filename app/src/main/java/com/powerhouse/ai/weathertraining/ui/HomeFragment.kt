@@ -10,13 +10,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -28,7 +27,6 @@ import com.jetpack.compose.myweather.utils.Constanta
 import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.BuildConfig
 import com.powerhouse.ai.weathertraining.R
-import com.powerhouse.ai.weathertraining.databinding.ActivityMainBinding
 import com.powerhouse.ai.weathertraining.databinding.FragmentHomeBinding
 import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.model.remote.api.ApiConfig
@@ -42,7 +40,7 @@ class HomeFragment : Fragment() {
     private val appId = BuildConfig.APP_ID
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
-    private val weatherViewModel: WeatherViewModel by viewModels()
+    private lateinit var weatherViewModel: WeatherViewModel
     private lateinit var preference: UserPreference
 
     override fun onCreateView(
@@ -58,7 +56,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preference = UserPreference(requireContext())
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        getViewModel(requireContext())
+        weatherViewModel = getViewModel(requireContext())
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)

@@ -1,14 +1,20 @@
 package com.powerhouse.ai.weathertraining.model.lib
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "schedule")
 data class Schedule(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int = 0,
+
+    @ColumnInfo(name = "scheduleName")
+    val scheduleName: String,
 
     @ColumnInfo(name = "day")
     val day: Int,
@@ -21,4 +27,4 @@ data class Schedule(
 
     @ColumnInfo(name = "note")
     val note: String
-)
+): Parcelable

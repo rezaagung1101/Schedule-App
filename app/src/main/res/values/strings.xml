@@ -47,5 +47,6 @@
     <string name="add">Add</string>
     <string name="list">List</string>
     <string name="schedule_app">Schedule App</string>
+    <string name="input_empty_message">Schedule name and time cannot be empty</string>
 
 </resources>

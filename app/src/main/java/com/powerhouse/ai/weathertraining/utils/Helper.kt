@@ -1,12 +1,13 @@
 package com.jetpack.compose.myweather.utils
 
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
 object Helper {
-    fun kelvinToCelcius(temp: Double): String{
+    fun kelvinToCelcius(temp: Double): String {
         return String.format("%.1f", temp - 273.15)
     }
 
@@ -21,7 +22,7 @@ object Helper {
         return dateFormat.format(Date(currentTimeMillis))
     }
 
-    fun getTodaysDayName():String {
+    fun getTodaysDayName(): String {
         val dateFormat = SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
         return dateFormat.format(Date())
     }
@@ -30,7 +31,11 @@ object Helper {
         return String.format("%02d:%02d", hour, minute)
     }
 
-    fun currentTime(time: Long): String{
+    fun getCurrentDay(): Int {
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+    }
+
+    fun currentTime(time: Long): String {
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return dateFormat.format(Date(time))
     }

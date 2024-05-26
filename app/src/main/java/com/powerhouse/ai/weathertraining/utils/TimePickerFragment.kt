@@ -33,8 +33,9 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
     override fun onDetach() {
         super.onDetach()
-        if (mListener != null) {
+        if (mListener != null || fragmentListener != null) {
             mListener = null
+            fragmentListener = null
         }
     }
 
