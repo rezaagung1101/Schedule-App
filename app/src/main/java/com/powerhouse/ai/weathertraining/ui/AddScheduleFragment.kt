@@ -54,6 +54,7 @@ class AddScheduleFragment : Fragment(), TimePickerFragment.DialogTimeListener,
                     viewModel.detailSchedule.observe(viewLifecycleOwner){ schedule ->
                         val intent = Intent(requireContext(), DetailScheduleActivity::class.java)
                         intent.putExtra(Constanta.schedule, schedule)
+                        intent.putExtra(Constanta.isFromAdd, true)
                         startActivity(intent)
                         requireActivity().finish()
                     }

@@ -8,23 +8,28 @@ import com.powerhouse.ai.weathertraining.databinding.ActivityDetailScheduleBindi
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
 
 class DetailScheduleActivity : AppCompatActivity() {
-    private var schedule = Schedule(day = 1, endTime = "00:00", startTime = "00.00", scheduleName = "", note = "")
+    private var schedule =
+        Schedule(day = 1, endTime = "00:00", startTime = "00.00", scheduleName = "", note = "")
+    private var isFromAdd: Boolean = false
     private lateinit var binding: ActivityDetailScheduleBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityDetailScheduleBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         schedule = intent.getParcelableExtra<Schedule>(Constanta.schedule) as Schedule
+        isFromAdd = intent.getBooleanExtra(Constanta.isFromAdd, false)
         setupInformation(schedule)
     }
 
-    private fun setupInformation(schedule: Schedule){
+    private fun setupInformation(schedule: Schedule) {
         binding.tvScheduleName.text = schedule.scheduleName
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        if (isFromAdd) {
+            super.onBackPressed()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else super.onBackPressed()
     }
 }

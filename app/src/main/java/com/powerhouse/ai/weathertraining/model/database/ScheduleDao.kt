@@ -18,7 +18,7 @@ interface ScheduleDao {
     @Query("SELECT * FROM schedule WHERE id = :id")
     fun getDetailSchedule(id: Int): Schedule
 
-    @Query("SELECT * FROM schedule WHERE day = :day")
+    @Query("SELECT * FROM schedule WHERE day = :day ORDER BY startTime ASC")
     fun getScheduleByDay(day: Int): LiveData<List<Schedule>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

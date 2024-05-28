@@ -5,9 +5,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jetpack.compose.myweather.utils.Constanta
 import com.jetpack.compose.myweather.utils.Helper
+import com.powerhouse.ai.weathertraining.adapter.ListScheduleAdapter
 import com.powerhouse.ai.weathertraining.databinding.ActivityDetailDayBinding
+import com.powerhouse.ai.weathertraining.model.lib.Schedule
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModel
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModelFactory
 
@@ -21,13 +24,18 @@ class DetailDayActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = getViewModel(this)
         day = intent.getIntExtra(Constanta.day, 0)
-        setupInformation(day)
+
+        viewModel.getScheduleByDay(day).observe(this){
+            setupInformation(it)
+        }
     }
 
-    private fun setupInformation(day: Int) {
+    private fun setupInformation(listSchedule: List<Schedule>) {
         binding.apply{
-            binding.tvDay.text = Helper.getDayName(day)
-            viewModel.getScheduleByDay(day)
+            tvDay.text = Helper.getDayName(day)
+            val layoutManager = LinearLayoutManager(this@DetailDayActivity, LinearLayoutManager.VERTICAL, false)
+            rvSchedule.layoutManager = layoutManager
+            rvSchedule.adapter = ListScheduleAdapter(listSchedule)
         }
     }
 
