@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -27,10 +28,13 @@ import com.jetpack.compose.myweather.utils.Constanta
 import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.BuildConfig
 import com.powerhouse.ai.weathertraining.R
+import com.powerhouse.ai.weathertraining.adapter.ListScheduleAdapter
 import com.powerhouse.ai.weathertraining.databinding.FragmentHomeBinding
 import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.model.remote.api.ApiConfig
 import com.powerhouse.ai.weathertraining.utils.UserPreference
+import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModel
+import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModelFactory
 import com.powerhouse.ai.weathertraining.viewModel.WeatherViewModel
 import com.powerhouse.ai.weathertraining.viewModel.WeatherViewModelFactory
 
@@ -41,6 +45,7 @@ class HomeFragment : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var weatherViewModel: WeatherViewModel
+    private lateinit var scheduleViewModel: ScheduleViewModel
     private lateinit var preference: UserPreference
 
     override fun onCreateView(
@@ -56,7 +61,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preference = UserPreference(requireContext())
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        weatherViewModel = getViewModel(requireContext())
+        weatherViewModel = getWeatherViewModel(requireContext())
+        scheduleViewModel = getScheduleViewModel(requireContext())
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
@@ -106,6 +112,11 @@ class HomeFragment : Fragment() {
                     showCurrentTime(it)
                 }
             }
+        }
+        scheduleViewModel.getTodaySchedule().observe(viewLifecycleOwner){
+            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            binding.rvSchedule.layoutManager = layoutManager
+            binding.rvSchedule.adapter = ListScheduleAdapter(it)
         }
         binding.swipeRefresh.setOnRefreshListener {
             setupInformation(context)
@@ -195,9 +206,16 @@ class HomeFragment : Fragment() {
             .show()
     }
 
-    private fun getViewModel(context: Context): WeatherViewModel {
+    private fun getWeatherViewModel(context: Context): WeatherViewModel {
         val viewModel: WeatherViewModel by viewModels {
             WeatherViewModelFactory(context, ApiConfig.getApiService(context))
+        }
+        return viewModel
+    }
+
+    private fun getScheduleViewModel(context: Context): ScheduleViewModel {
+        val viewModel: ScheduleViewModel by viewModels {
+            ScheduleViewModelFactory(context)
         }
         return viewModel
     }

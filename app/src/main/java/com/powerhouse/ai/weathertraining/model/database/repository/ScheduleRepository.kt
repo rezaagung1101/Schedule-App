@@ -23,11 +23,6 @@ class ScheduleRepository(private val database: Database) {
 
     fun getScheduleByDay(day: Int): LiveData<List<Schedule>> = dao.getScheduleByDay(day)
 
-//    fun getTodaySchedule() : List<Schedule> {
-//        val currentDay = Helper.getCurrentDay()
-//        return dao.getScheduleByDay(currentDay)
-//    }
-
     fun getAllScheduledDays(): LiveData<List<Int>> = dao.getAllScheduledDays()
 
     fun insertSchedule(schedule: Schedule) = runBlocking {
