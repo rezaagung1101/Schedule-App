@@ -7,6 +7,7 @@ import java.util.Locale
 import java.util.TimeZone
 
 object Helper {
+
     fun kelvinToCelcius(temp: Double): String {
         return String.format("%.1f", temp - 273.15)
     }
@@ -25,6 +26,13 @@ object Helper {
     fun getTodaysDayName(): String {
         val dateFormat = SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
         return dateFormat.format(Date())
+    }
+
+    fun getDayName(day: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK, day)
+        val dateFormat = SimpleDateFormat("EEEE", Locale.getDefault())
+        return dateFormat.format(calendar.time)
     }
 
     fun getFormatTime(hour: Int, minute: Int): String {

@@ -14,7 +14,6 @@ import com.jetpack.compose.myweather.utils.Constanta
 import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.R
 import com.powerhouse.ai.weathertraining.databinding.FragmentAddScheduleBinding
-import com.powerhouse.ai.weathertraining.model.lib.Schedule
 import com.powerhouse.ai.weathertraining.utils.TimePickerFragment
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModel
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModelFactory

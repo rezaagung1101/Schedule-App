@@ -19,8 +19,8 @@
 
     <fragment
         android:id="@+id/navigation_list_day_schedule"
-        android:name="com.powerhouse.ai.weathertraining.ui.ListDayScheduleFragment"
+        android:name="com.powerhouse.ai.weathertraining.ui.schedule.ListScheduledDaysFragment"
         android:label="@string/list"
-        tools:layout="@layout/fragment_list_day_schedule" />
+        tools:layout="@layout/fragment_list_scheduled_days" />
 
 </navigation>

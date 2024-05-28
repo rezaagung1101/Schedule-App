@@ -3,10 +3,13 @@ package com.powerhouse.ai.weathertraining.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.powerhouse.ai.weathertraining.model.database.repository.ScheduleRepository
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
+import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.utils.Event
 import com.powerhouse.ai.weathertraining.utils.QueryType
+import kotlinx.coroutines.launch
 
 class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel() {
     private var _todaySchedule = MutableLiveData<List<Schedule>>()
@@ -23,12 +26,12 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
         _queryType.value = QueryType.CURRENT_DAY
     }
 
-    fun getTodaySchedule() {
-        _todaySchedule.value = repository.getTodaySchedule()
-    }
+//    fun getTodaySchedule() {
+//        _todaySchedule.value = repository.getTodaySchedule()
+//    }
 
-    fun getScheduleByDay(day: Int) {
-        _todaySchedule.value = repository.getScheduleByDay(day)
+    fun getScheduleByDay(day: Int): LiveData<List<Schedule>>{
+        return repository.getScheduleByDay(day)
     }
 
     fun setQueryType(queryType: QueryType) {
@@ -36,8 +39,15 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
     }
 
     fun getNearestSchedule() {
-        _nearestSchedule.value = repository.getNearestSchedule(_queryType.value!!)
+        viewModelScope.launch {
+            _nearestSchedule.value = repository.getNearestSchedule(_queryType.value!!)
+        }
     }
+
+    fun getAllScheduledDays(): LiveData<List<Int>> {
+        return repository.getAllScheduledDays()
+    }
+
 
     fun insertSchedule(
         scheduleName: String,
