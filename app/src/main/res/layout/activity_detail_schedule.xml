@@ -21,7 +21,7 @@
             android:drawablePadding="10dp"
             android:text="@string/schedule_name"
             android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_book" />
+            android:drawableLeft="@drawable/ic_book" />
 
         <TextView
             android:id="@+id/tv_schedule_name"
@@ -39,7 +39,7 @@
             android:drawablePadding="10dp"
             android:text="@string/time"
             android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_time" />
+            android:drawableLeft="@drawable/ic_time"/>
 
         <TextView
             android:id="@+id/tv_time"
@@ -57,7 +57,7 @@
             android:drawablePadding="10dp"
             android:text="@string/note"
             android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_note" />
+            android:drawableLeft="@drawable/ic_note" />
 
         <TextView
             android:id="@+id/tv_note"
