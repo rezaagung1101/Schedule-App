@@ -8,7 +8,7 @@ import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 
 @androidx.room.Database(
     entities = [WeatherRecord::class, Schedule::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class Database: RoomDatabase(){

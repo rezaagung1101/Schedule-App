@@ -1,10 +1,16 @@
 package com.powerhouse.ai.weathertraining.model.database.repository
 
 import androidx.lifecycle.LiveData
+import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.model.database.Database
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
+import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.utils.QueryType
 import com.powerhouse.ai.weathertraining.utils.QueryUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.util.Calendar
 
 class ScheduleRepository(private val database: Database) {
     private val dao = database.scheduleDao()
@@ -13,11 +19,22 @@ class ScheduleRepository(private val database: Database) {
         val query = QueryUtil.nearestQuery(queryType)
         return dao.getNearestSchedule(query)
     }
-    fun getDetailSchedule(id: Int): Schedule = dao.getDetailSchedule(id)
+    fun getDetailSchedule(id: Int): LiveData<Schedule> = dao.getDetailSchedule(id)
 
-    fun getTodaySchedule(day: Int): List<Schedule> = dao.getTodaySchedule(day)
+    fun getScheduleByDay(day: Int): LiveData<List<Schedule>> = dao.getScheduleByDay(day)
 
-    fun insertSchedule(schedule: Schedule) = dao.insertSchedule(schedule)
+    fun getAllScheduledDays(): LiveData<List<Int>> = dao.getAllScheduledDays()
 
-    fun deleteSchedule(schedule: Schedule) = dao.delete(schedule)
+    fun insertSchedule(schedule: Schedule) = runBlocking {
+        this.launch(Dispatchers.IO) {
+            dao.insertSchedule(schedule)
+        }
+    }
+
+    fun deleteScheduleById(id: Int) = runBlocking {
+        this.launch(Dispatchers.IO) {
+            dao.deleteScheduleById(id)
+        }
+    }
+
 }

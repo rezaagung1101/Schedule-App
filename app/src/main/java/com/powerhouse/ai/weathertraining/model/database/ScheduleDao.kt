@@ -11,21 +11,23 @@ import androidx.sqlite.db.SupportSQLiteQuery
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
 
 @Dao
-interface ScheduleDao{
+interface ScheduleDao {
     @RawQuery(observedEntities = [Schedule::class])
     fun getNearestSchedule(query: SupportSQLiteQuery): Schedule?
 
     @Query("SELECT * FROM schedule WHERE id = :id")
-    fun getDetailSchedule(id: Int): Schedule
+    fun getDetailSchedule(id: Int): LiveData<Schedule>
 
-    @Query("SELECT * FROM schedule WHERE day = :day")
-    fun getTodaySchedule(day: Int): List<Schedule>
+    @Query("SELECT * FROM schedule WHERE day = :day ORDER BY startTime ASC")
+    fun getScheduleByDay(day: Int): LiveData<List<Schedule>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSchedule(schedule: Schedule)
 
-    @Delete
-    fun delete(schedule: Schedule)
+    @Query("SELECT DISTINCT day FROM schedule ORDER BY day ASC")
+    fun getAllScheduledDays(): LiveData<List<Int>>
 
+    @Query("DELETE FROM schedule WHERE id = :id")
+    fun deleteScheduleById(id: Int)
 
 }
