@@ -19,7 +19,7 @@ class ScheduleRepository(private val database: Database) {
         val query = QueryUtil.nearestQuery(queryType)
         return dao.getNearestSchedule(query)
     }
-    fun getDetailSchedule(id: Int): Schedule = dao.getDetailSchedule(id)
+    fun getDetailSchedule(id: Int): LiveData<Schedule> = dao.getDetailSchedule(id)
 
     fun getScheduleByDay(day: Int): LiveData<List<Schedule>> = dao.getScheduleByDay(day)
 
@@ -30,9 +30,11 @@ class ScheduleRepository(private val database: Database) {
             dao.insertSchedule(schedule)
         }
     }
-    fun deleteSchedule(schedule: Schedule) = runBlocking {
+
+    fun deleteScheduleById(id: Int) = runBlocking {
         this.launch(Dispatchers.IO) {
-            dao.delete(schedule)
+            dao.deleteScheduleById(id)
         }
     }
+
 }

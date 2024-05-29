@@ -1,73 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.DetailScheduleActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        tools:context=".ui.detail.DetailActivity">
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:drawablePadding="10dp"
-            android:text="@string/schedule_name"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/ic_book" />
+            android:orientation="vertical"
+            android:padding="20dp"
+            tools:context=".ui.detail.DetailActivity">
 
-        <TextView
-            android:id="@+id/tv_schedule_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:textColor="@color/textPrimary"
-            android:textSize="16sp"
-            tools:text="@tools:sample/lorem" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_book"
+                android:drawablePadding="10dp"
+                android:text="@string/schedule_name"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:drawablePadding="10dp"
-            android:text="@string/time"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/ic_time"/>
+            <TextView
+                android:id="@+id/tv_schedule_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                tools:text="@tools:sample/lorem" />
 
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:textColor="@color/textPrimary"
-            android:textSize="16sp"
-            tools:text="@tools:sample/date/day_of_week" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_time"
+                android:drawablePadding="10dp"
+                android:text="@string/time"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:drawablePadding="10dp"
-            android:text="@string/note"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/ic_note" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                tools:text="@tools:sample/date/day_of_week" />
 
-        <TextView
-            android:id="@+id/tv_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="34dp"
-            android:textColor="@color/textPrimary"
-            android:textSize="16sp"
-            tools:text="@tools:sample/lorem/random" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_note"
+                android:drawablePadding="10dp"
+                android:text="@string/note"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="34dp"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                tools:text="@tools:sample/lorem/random" />
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

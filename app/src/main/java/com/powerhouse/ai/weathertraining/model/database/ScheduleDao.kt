@@ -16,7 +16,7 @@ interface ScheduleDao {
     fun getNearestSchedule(query: SupportSQLiteQuery): Schedule?
 
     @Query("SELECT * FROM schedule WHERE id = :id")
-    fun getDetailSchedule(id: Int): Schedule
+    fun getDetailSchedule(id: Int): LiveData<Schedule>
 
     @Query("SELECT * FROM schedule WHERE day = :day ORDER BY startTime ASC")
     fun getScheduleByDay(day: Int): LiveData<List<Schedule>>
@@ -27,7 +27,7 @@ interface ScheduleDao {
     @Query("SELECT DISTINCT day FROM schedule ORDER BY day ASC")
     fun getAllScheduledDays(): LiveData<List<Int>>
 
-    @Delete
-    fun delete(schedule: Schedule)
+    @Query("DELETE FROM schedule WHERE id = :id")
+    fun deleteScheduleById(id: Int)
 
 }

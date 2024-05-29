@@ -1,5 +1,6 @@
 package com.powerhouse.ai.weathertraining.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +14,8 @@ import com.powerhouse.ai.weathertraining.utils.QueryType
 import kotlinx.coroutines.launch
 
 class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel() {
-//    private var _todaySchedule = MutableLiveData<List<Schedule>>()
-//    val todaySchedule: LiveData<List<Schedule>> = _todaySchedule
+//    private var _schedule = MutableLiveData<Schedule>()
+//    val schedule: LiveData<Schedule> = _schedule
     private var _nearestSchedule = MutableLiveData<Schedule>()
     val nearestSchedule: LiveData<Schedule> = _nearestSchedule
     private var _detailSchedule = MutableLiveData<Schedule>()
@@ -32,9 +33,8 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
         return repository.getScheduleByDay(currentDay)
     }
 
-    fun getScheduleByDay(day: Int): LiveData<List<Schedule>>{
-        return repository.getScheduleByDay(day)
-    }
+    fun getScheduleByDay(day: Int): LiveData<List<Schedule>> = repository.getScheduleByDay(day)
+
 
     fun setQueryType(queryType: QueryType) {
         _queryType.value = queryType
@@ -46,10 +46,7 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
         }
     }
 
-    fun getAllScheduledDays(): LiveData<List<Int>> {
-        return repository.getAllScheduledDays()
-    }
-
+    fun getAllScheduledDays(): LiveData<List<Int>> = repository.getAllScheduledDays()
 
     fun insertSchedule(
         scheduleName: String,
@@ -75,5 +72,6 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
         _detailSchedule.value = schedule
     }
 
-    fun deleteSchedule(schedule: Schedule) = repository.deleteSchedule(schedule)
+    fun deleteSchedule(schedule: Schedule) = repository.deleteScheduleById(schedule.id)
+
 }

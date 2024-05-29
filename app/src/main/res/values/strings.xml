@@ -50,5 +50,11 @@
     <string name="input_empty_message">Schedule name and time cannot be empty</string>
     <string name="your_activity">Your Activity</string>
     <string name="time">Time</string>
+    <string name="delete_schedule">Delete Schedule</string>
+    <string name="delete_alert">Delete this schedule?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="delete_success_message">Schedule deleted successfully!</string>
+    <string name="detail_schedule">Detail Schedule</string>
 
 </resources>
