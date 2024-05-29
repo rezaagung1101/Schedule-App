@@ -65,6 +65,7 @@ class DetailScheduleActivity : AppCompatActivity() {
                     setPositiveButton(getString(R.string.yes)) { _, _ ->
                         viewModel.deleteSchedule(schedule)
                         Toast.makeText(this@DetailScheduleActivity, resources.getString(R.string.delete_success_message), Toast.LENGTH_SHORT).show()
+                        onBackPressed()
                         finish()
                     }
                     show()
