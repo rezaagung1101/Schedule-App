@@ -22,7 +22,12 @@ class DetailScheduleActivity : AppCompatActivity() {
     }
 
     private fun setupInformation(schedule: Schedule) {
-        binding.tvScheduleName.text = schedule.scheduleName
+        binding.apply {
+            tvScheduleName.text = schedule.scheduleName
+            tvTime.text = "${schedule.startTime}-${schedule.endTime}"
+            tvNote.text = schedule.note
+        }
+
     }
 
     override fun onBackPressed() {

@@ -49,5 +49,6 @@
     <string name="schedule_app">Schedule App</string>
     <string name="input_empty_message">Schedule name and time cannot be empty</string>
     <string name="your_activity">Your Activity</string>
+    <string name="time">Time</string>
 
 </resources>
