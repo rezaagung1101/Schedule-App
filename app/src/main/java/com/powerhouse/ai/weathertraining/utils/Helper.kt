@@ -1,5 +1,10 @@
 package com.jetpack.compose.myweather.utils
 
+import android.content.Context
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import com.powerhouse.ai.weathertraining.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -43,14 +48,29 @@ object Helper {
         return Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
     }
 
-    fun currentTime(time: Long): String {
-        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return dateFormat.format(Date(time))
+    fun showDialog(
+        context: Context,
+        message: String,
+        negativeMsg: String,
+        positiveMsg: String,
+        positiveListener: () -> Unit,
+    ) {
+        AlertDialog.Builder(context).apply {
+            setMessage(message)
+            setNegativeButton(negativeMsg, null)
+            setPositiveButton(positiveMsg) { _, _ ->
+                positiveListener.invoke()
+            }
+            val dialog = this.create()
+            dialog.show()
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextColor(ContextCompat.getColor(context, R.color.danger))
+            dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog)
+        }
     }
+}
 
-    fun convertUnixTimeToAMPM(unixTime: Int): String {
-        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        val date = Date(unixTime * 1000L)
-        return dateFormat.format(date)
-    }
+fun currentTime(time: Long): String {
+    val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+    return dateFormat.format(Date(time))
 }

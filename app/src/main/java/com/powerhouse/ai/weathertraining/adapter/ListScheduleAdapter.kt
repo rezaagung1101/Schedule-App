@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jetpack.compose.myweather.utils.Constanta
-import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.databinding.CardScheduleItemBinding
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
-import com.powerhouse.ai.weathertraining.ui.DetailScheduleActivity
-import com.powerhouse.ai.weathertraining.ui.schedule.DetailDayActivity
+import com.powerhouse.ai.weathertraining.ui.schedule.DetailScheduleActivity
 
 class ListScheduleAdapter(private val listData: List<Schedule>) :
     RecyclerView.Adapter<ListScheduleAdapter.ViewHolder>() {

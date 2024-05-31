@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jetpack.compose.myweather.utils.Constanta
 import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.databinding.CardDayItemBinding
-import com.powerhouse.ai.weathertraining.ui.schedule.DetailDayActivity
+import com.powerhouse.ai.weathertraining.ui.schedule.day.DetailDayActivity
 
 class ListDayAdapter(private val listData: List<Int>) :
     RecyclerView.Adapter<ListDayAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.powerhouse.ai.weathertraining.ui
+package com.powerhouse.ai.weathertraining.ui.schedule
 
 import android.content.Context
 import android.content.Intent
@@ -10,9 +10,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.jetpack.compose.myweather.utils.Constanta
+import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.R
 import com.powerhouse.ai.weathertraining.databinding.ActivityDetailScheduleBinding
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
+import com.powerhouse.ai.weathertraining.ui.MainActivity
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModel
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModelFactory
 
@@ -59,16 +61,20 @@ class DetailScheduleActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_delete -> {
-                AlertDialog.Builder(this).apply {
-                    setMessage(getString(R.string.delete_alert))
-                    setNegativeButton(getString(R.string.no), null)
-                    setPositiveButton(getString(R.string.yes)) { _, _ ->
-                        viewModel.deleteSchedule(schedule)
-                        Toast.makeText(this@DetailScheduleActivity, resources.getString(R.string.delete_success_message), Toast.LENGTH_SHORT).show()
-                        onBackPressed()
-                        finish()
-                    }
-                    show()
+                Helper.showDialog(
+                    this,
+                    getString(R.string.delete_alert),
+                    getString(R.string.no),
+                    getString(R.string.yes)
+                ) {
+                    viewModel.deleteSchedule(schedule)
+                    Toast.makeText(
+                        this@DetailScheduleActivity,
+                        resources.getString(R.string.delete_success_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    onBackPressed()
+                    finish()
                 }
             }
         }
