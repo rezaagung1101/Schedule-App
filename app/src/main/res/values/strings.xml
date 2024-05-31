@@ -56,5 +56,6 @@
     <string name="yes">Yes</string>
     <string name="delete_success_message">Schedule deleted successfully!</string>
     <string name="detail_schedule">Detail Schedule</string>
+    <string name="add_schedule_confirmation">Add new schedule?</string>
 
 </resources>

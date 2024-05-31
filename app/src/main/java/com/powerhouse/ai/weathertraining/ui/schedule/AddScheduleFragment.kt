@@ -47,11 +47,15 @@ class AddScheduleFragment : Fragment(), TimePickerFragment.DialogTimeListener,
         binding.btnSave.setOnClickListener {
             insertSchedule()
         }
-        viewModel.isSaved.observe(viewLifecycleOwner){
+        viewModel.isSaved.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { isSaved ->
-                if(isSaved == true){
-                    Toast.makeText(requireContext(), "Course saved successfully", Toast.LENGTH_SHORT).show()
-                    viewModel.detailSchedule.observe(viewLifecycleOwner){ schedule ->
+                if (isSaved == true) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Course saved successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    viewModel.detailSchedule.observe(viewLifecycleOwner) { schedule ->
                         val intent = Intent(requireContext(), DetailScheduleActivity::class.java)
                         intent.putExtra(Constanta.schedule, schedule)
                         intent.putExtra(Constanta.isFromAdd, true)
@@ -59,7 +63,8 @@ class AddScheduleFragment : Fragment(), TimePickerFragment.DialogTimeListener,
                         requireActivity().finish()
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Failed to save course !", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to save course !", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -110,12 +115,23 @@ class AddScheduleFragment : Fragment(), TimePickerFragment.DialogTimeListener,
             if (scheduleName.isEmpty() || startTimeHour == 0 || endTimeHour == 0) {
                 if (scheduleName.isEmpty()) binding.etScheduleName.error =
                     "Required fields"
-                Toast.makeText(requireContext(), resources.getString(R.string.input_empty_message), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    resources.getString(R.string.input_empty_message),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return
             } else {
                 val startTime = Helper.getFormatTime(startTimeHour, startTimeMinute)
                 val endTime = Helper.getFormatTime(endTimeHour, endTimeMinute)
-                viewModel.insertSchedule(scheduleName, day, startTime, endTime, note)
+                Helper.showDialog(
+                    requireContext(),
+                    getString(R.string.add_schedule_confirmation),
+                    getString(R.string.no),
+                    getString(R.string.yes)
+                ) {
+                    viewModel.insertSchedule(scheduleName, day, startTime, endTime, note)
+                }
             }
 
         }
