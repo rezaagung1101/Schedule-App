@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.powerhouse.ai.weathertraining.ui.HomeFragment"
+        android:name="com.powerhouse.ai.weathertraining.ui.schedule.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_add_schedule"
-        android:name="com.powerhouse.ai.weathertraining.ui.AddScheduleFragment"
+        android:name="com.powerhouse.ai.weathertraining.ui.schedule.AddScheduleFragment"
         android:label="@string/add"
         tools:layout="@layout/fragment_add_schedule" />
 
     <fragment
         android:id="@+id/navigation_list_day_schedule"
-        android:name="com.powerhouse.ai.weathertraining.ui.schedule.ListScheduledDaysFragment"
+        android:name="com.powerhouse.ai.weathertraining.ui.schedule.day.ListScheduledDaysFragment"
         android:label="@string/list"
         tools:layout="@layout/fragment_list_scheduled_days" />
 

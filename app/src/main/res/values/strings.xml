@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather Training</string>
+    <string name="app_name">My Schedule</string>
     <string name="your_location">Your location,</string>
     <string name="default_value">0</string>
     <string name="celcius_degree">°C</string>
@@ -56,5 +56,6 @@
     <string name="yes">Yes</string>
     <string name="delete_success_message">Schedule deleted successfully!</string>
     <string name="detail_schedule">Detail Schedule</string>
+    <string name="add_schedule_confirmation">Add new schedule?</string>
 
 </resources>

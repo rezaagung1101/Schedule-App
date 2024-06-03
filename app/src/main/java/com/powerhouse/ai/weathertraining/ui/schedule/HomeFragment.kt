@@ -1,4 +1,4 @@
-package com.powerhouse.ai.weathertraining.ui
+package com.powerhouse.ai.weathertraining.ui.schedule
 
 import android.Manifest
 import android.app.Activity

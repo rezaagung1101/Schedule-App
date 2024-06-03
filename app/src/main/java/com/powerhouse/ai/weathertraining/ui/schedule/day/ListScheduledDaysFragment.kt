@@ -1,4 +1,4 @@
-package com.powerhouse.ai.weathertraining.ui.schedule
+package com.powerhouse.ai.weathertraining.ui.schedule.day
 
 import android.content.Context
 import android.os.Bundle

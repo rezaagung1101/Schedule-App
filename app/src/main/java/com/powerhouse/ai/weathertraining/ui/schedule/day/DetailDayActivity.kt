@@ -1,10 +1,9 @@
-package com.powerhouse.ai.weathertraining.ui.schedule
+package com.powerhouse.ai.weathertraining.ui.schedule.day
 
 import android.content.Context
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jetpack.compose.myweather.utils.Constanta
 import com.jetpack.compose.myweather.utils.Helper
