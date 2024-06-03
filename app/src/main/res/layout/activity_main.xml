@@ -6,35 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/card_toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:cardElevation="6dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="?attr/colorPrimary"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:elevation="8dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/schedule_app"-->
-<!--                android:textSize="16sp"-->
-<!--                android:fontFamily="@font/popping_bold"/>-->
-<!--        </androidx.appcompat.widget.Toolbar>-->
-<!--    </androidx.cardview.widget.CardView>-->
-
     <fragment
         android:id="@+id/nav_host_fragment_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -61,6 +32,10 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
+            android:background="@color/blue"
+            app:itemRippleColor="@color/blue_light"
+            app:itemTextColor="@color/textPrimary"
+            app:itemIconTint="@color/textPrimary"
             android:layout_height="70dp"
             app:itemTextAppearanceActive="@style/BottomNavActive"
             app:itemTextAppearanceInactive="@style/BottomNavInactive"

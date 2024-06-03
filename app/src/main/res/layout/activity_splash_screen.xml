@@ -4,25 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SplashScreen"
-    android:layout_margin="16dp">
+    android:background="@color/blue_dark"
+    android:padding="@dimen/fab_margin"
+    tools:context=".ui.SplashScreen">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/popping_bold"
+        android:elevation="8dp"
         android:text="@string/app_name"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/baseline_cloud_queue_24"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:elevation="6dp"
+        android:src="@drawable/baseline_collections_bookmark_24"
         app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        android:tint="@color/white"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
