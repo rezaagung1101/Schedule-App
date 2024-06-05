@@ -23,6 +23,7 @@ class ListDayAdapter(private val listData: List<Int>) :
         val day = listData[position]
         holder.binding.apply {
             tvDay.text = Helper.getDayName(day)
+            tvDayCount.text = Helper.dayCountFormat(day)
             root.setOnClickListener {
                 val intent = Intent(it.context, DetailDayActivity::class.java)
                 intent.putExtra(Constanta.day, day)

@@ -1,16 +1,13 @@
 package com.powerhouse.ai.weathertraining.model.database.repository
 
 import androidx.lifecycle.LiveData
-import com.jetpack.compose.myweather.utils.Helper
 import com.powerhouse.ai.weathertraining.model.database.Database
 import com.powerhouse.ai.weathertraining.model.lib.Schedule
-import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.utils.QueryType
 import com.powerhouse.ai.weathertraining.utils.QueryUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.util.Calendar
 
 class ScheduleRepository(private val database: Database) {
     private val dao = database.scheduleDao()

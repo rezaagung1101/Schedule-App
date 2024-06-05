@@ -15,11 +15,13 @@
         android:layout_margin="8dp">
 
         <ImageView
+            android:backgroundTint="@color/textPrimary"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_time"
             app:layout_constraintStart_toStartOf="parent" />
         <TextView
+            android:textColor="@color/textPrimary"
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/fab_margin"
+            android:textColor="@color/textPrimary"
             android:text="@string/schedule"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent" />
