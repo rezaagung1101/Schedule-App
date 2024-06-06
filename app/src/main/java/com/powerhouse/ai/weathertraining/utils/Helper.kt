@@ -68,9 +68,18 @@ object Helper {
             dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog)
         }
     }
+
+    fun currentTime(time: Long): String {
+        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        return dateFormat.format(Date(time))
+    }
+
+    fun dayCountFormat(day: Int): String{
+        val format = if(day==1) "${day}st"
+        else if(day==2) "${day}nd"
+        else if(day==3) "${day}rd"
+        else "${day}th"
+        return "$format of the week"
+    }
 }
 
-fun currentTime(time: Long): String {
-    val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-    return dateFormat.format(Date(time))
-}
