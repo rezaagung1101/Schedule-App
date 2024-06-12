@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel() {
 //    private var _schedule = MutableLiveData<Schedule>()
 //    val schedule: LiveData<Schedule> = _schedule
-    private var _nearestSchedule = MutableLiveData<Schedule>()
-    val nearestSchedule: LiveData<Schedule> = _nearestSchedule
+//    private var _nearestSchedule = MutableLiveData<Schedule>()
+//    val nearestSchedule: LiveData<Schedule> = _nearestSchedule
     private var _detailSchedule = MutableLiveData<Schedule>()
     val detailSchedule: LiveData<Schedule> = _detailSchedule
     private val _queryType = MutableLiveData<QueryType>()
@@ -40,11 +40,7 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
         _queryType.value = queryType
     }
 
-    fun getNearestSchedule() {
-        viewModelScope.launch {
-            _nearestSchedule.value = repository.getNearestSchedule(_queryType.value!!)
-        }
-    }
+    fun getNearestSchedule(): LiveData<Schedule>? = repository.getNearestSchedule(_queryType.value!!)
 
     fun getAllScheduledDays(): LiveData<List<Int>> = repository.getAllScheduledDays()
 

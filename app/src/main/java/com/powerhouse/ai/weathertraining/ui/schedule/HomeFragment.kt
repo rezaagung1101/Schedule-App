@@ -30,8 +30,10 @@ import com.powerhouse.ai.weathertraining.BuildConfig
 import com.powerhouse.ai.weathertraining.R
 import com.powerhouse.ai.weathertraining.adapter.ListScheduleAdapter
 import com.powerhouse.ai.weathertraining.databinding.FragmentHomeBinding
+import com.powerhouse.ai.weathertraining.model.lib.Schedule
 import com.powerhouse.ai.weathertraining.model.lib.WeatherRecord
 import com.powerhouse.ai.weathertraining.model.remote.api.ApiConfig
+import com.powerhouse.ai.weathertraining.utils.QueryType
 import com.powerhouse.ai.weathertraining.utils.UserPreference
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModel
 import com.powerhouse.ai.weathertraining.viewModel.ScheduleViewModelFactory
@@ -47,6 +49,7 @@ class HomeFragment : Fragment() {
     private lateinit var weatherViewModel: WeatherViewModel
     private lateinit var scheduleViewModel: ScheduleViewModel
     private lateinit var preference: UserPreference
+    private var queryType = QueryType.CURRENT_DAY;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +63,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preference = UserPreference(requireContext())
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
         weatherViewModel = getWeatherViewModel(requireContext())
         scheduleViewModel = getScheduleViewModel(requireContext())
         locationCallback = object : LocationCallback() {
@@ -79,27 +83,44 @@ class HomeFragment : Fragment() {
         setupInformation(requireContext())
     }
 
+    private fun checkQuery(listSchedule: List<Schedule>?) {
+        if (listSchedule != null) {
+            scheduleViewModel.setQueryType(queryType)
+            //langsung get nearest dari viewmodel
+            scheduleViewModel.apply {
+                setQueryType(queryType)
+                getNearestSchedule()?.observe(viewLifecycleOwner){
+                    if(it!=null){
+                        binding.tvNearestScheduleTitle.text = it.scheduleName
+                        binding.tvNearestScheduleTime.text = "${it.startTime}-${it.endTime}"
+                    }
+                }
+            }
+        }
+    }
+
     private fun setupInformation(context: Context) {
-        if(checkLocationPermission(context)){
-            weatherViewModel.apply{
-                currentCity.observe(viewLifecycleOwner){
-                    getCityWeatherDB(it).observe(viewLifecycleOwner){ weather ->
-                        if(weather != null){
+        if (checkLocationPermission(context)) {
+            weatherViewModel.apply {
+                currentCity.observe(viewLifecycleOwner) {
+                    getCityWeatherDB(it).observe(viewLifecycleOwner) { weather ->
+                        if (weather != null) {
                             preference.saveCurrentCity(weather.city)
                             setupInformation(weather)
                         }
                     }
                 }
-                if (latitude.value !=null && longitude.value !=null && latitude.value != 0.0 && longitude.value != 0.0){
+                if (latitude.value != null && longitude.value != null && latitude.value != 0.0 && longitude.value != 0.0) {
                     getWeatherReport(latitude.value!!, longitude.value!!, appId)
-                }else{
+                } else {
                     requestLocationUpdates(context)
                 }
-                showNoInternetSnackbar.observe(viewLifecycleOwner){ showSnackbar ->
-                    if(showSnackbar){
-                        Snackbar.make(binding.root, "No Internet Connection", Snackbar.LENGTH_SHORT).show()
+                showNoInternetSnackbar.observe(viewLifecycleOwner) { showSnackbar ->
+                    if (showSnackbar) {
+                        Snackbar.make(binding.root, "No Internet Connection", Snackbar.LENGTH_SHORT)
+                            .show()
                         weatherViewModel.setSnackBarValue(false)
-                        getCityWeatherDB(preference.getCurrentCity()!!).observe(viewLifecycleOwner){
+                        getCityWeatherDB(preference.getCurrentCity()!!).observe(viewLifecycleOwner) {
                             setupInformation(it)
                         }
                     }
@@ -108,15 +129,17 @@ class HomeFragment : Fragment() {
                     showLoading(it)
                 }
                 getCurrentTime()
-                currentTime.observe(viewLifecycleOwner){
+                currentTime.observe(viewLifecycleOwner) {
                     showCurrentTime(it)
                 }
             }
         }
-        scheduleViewModel.getTodaySchedule().observe(viewLifecycleOwner){
-            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        scheduleViewModel.getTodaySchedule().observe(viewLifecycleOwner) {
+            val layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             binding.rvSchedule.layoutManager = layoutManager
             binding.rvSchedule.adapter = ListScheduleAdapter(it)
+            checkQuery(it)
         }
         binding.swipeRefresh.setOnRefreshListener {
             setupInformation(context)
@@ -135,10 +158,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupInformation(weather: WeatherRecord) {
-        binding.apply{
+        binding.apply {
             preference.saveCurrentCity(weather.city)
             tvLocation.text = weather.city
-            tvTemperature.text = resources.getString(R.string.temp_value, Helper.kelvinToCelcius(weather.temperature.toDouble()))
+            tvTemperature.text = resources.getString(
+                R.string.temp_value,
+                Helper.kelvinToCelcius(weather.temperature.toDouble())
+            )
         }
     }
 
