@@ -13,7 +13,7 @@ import com.powerhouse.ai.weathertraining.model.lib.Schedule
 @Dao
 interface ScheduleDao {
     @RawQuery(observedEntities = [Schedule::class])
-    fun getNearestSchedule(query: SupportSQLiteQuery): Schedule?
+    fun getNearestSchedule(query: SupportSQLiteQuery): LiveData<Schedule>?
 
     @Query("SELECT * FROM schedule WHERE id = :id")
     fun getDetailSchedule(id: Int): LiveData<Schedule>

@@ -12,7 +12,7 @@ import kotlinx.coroutines.runBlocking
 class ScheduleRepository(private val database: Database) {
     private val dao = database.scheduleDao()
 
-    fun getNearestSchedule(queryType: QueryType) : Schedule? {
+    fun getNearestSchedule(queryType: QueryType) : LiveData<Schedule>? {
         val query = QueryUtil.nearestQuery(queryType)
         return dao.getNearestSchedule(query)
     }
