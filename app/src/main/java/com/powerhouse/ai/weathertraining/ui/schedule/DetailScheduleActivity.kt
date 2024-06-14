@@ -40,7 +40,7 @@ class DetailScheduleActivity : AppCompatActivity() {
         binding.apply {
             tvScheduleName.text = schedule.scheduleName
             tvTime.text = "${schedule.startTime}-${schedule.endTime}"
-            tvNote.text = schedule.note
+            tvNote.text = schedule.note.ifEmpty { "-" }
         }
 
     }
