@@ -37,6 +37,7 @@
                 android:drawableLeft="@drawable/ic_book"
                 android:drawablePadding="10dp"
                 android:text="@string/schedule_name"
+                android:textColor="@color/grey"
                 android:textSize="16sp" />
 
             <TextView
@@ -44,7 +45,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="34dp"
-                android:textColor="@color/textPrimary"
                 android:textSize="16sp"
                 tools:text="@tools:sample/lorem" />
 
@@ -55,6 +55,7 @@
                 android:drawableLeft="@drawable/ic_time"
                 android:drawablePadding="10dp"
                 android:text="@string/time"
+                android:textColor="@color/grey"
                 android:textSize="16sp" />
 
             <TextView
@@ -62,7 +63,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="34dp"
-                android:textColor="@color/textPrimary"
                 android:textSize="16sp"
                 tools:text="@tools:sample/date/day_of_week" />
 
@@ -73,6 +73,7 @@
                 android:drawableLeft="@drawable/ic_note"
                 android:drawablePadding="10dp"
                 android:text="@string/note"
+                android:textColor="@color/grey"
                 android:textSize="16sp" />
 
             <TextView
@@ -80,7 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="34dp"
-                android:textColor="@color/textPrimary"
                 android:textSize="16sp"
                 tools:text="@tools:sample/lorem/random" />
 
