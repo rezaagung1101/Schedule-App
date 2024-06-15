@@ -1,7 +1,7 @@
 package com.jetpack.compose.myweather.utils
 
 import android.content.Context
-import android.widget.Toast
+import android.text.format.DateUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.powerhouse.ai.weathertraining.R
@@ -10,6 +10,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+
 
 object Helper {
 
@@ -69,17 +70,45 @@ object Helper {
         }
     }
 
-    fun currentTime(time: Long): String {
-        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return dateFormat.format(Date(time))
-    }
-
     fun dayCountFormat(day: Int): String{
         val format = if(day==1) "${day}st"
         else if(day==2) "${day}nd"
         else if(day==3) "${day}rd"
         else "${day}th"
         return "$format of the week"
+    }
+
+    fun timeDifference(day: Int, targetTime: String): String {
+        val splitTime = targetTime.split(":")
+
+        val start = Calendar.getInstance()
+        start.set(Calendar.DAY_OF_WEEK, day)
+        start.set(Calendar.HOUR_OF_DAY, splitTime[0].toInt())
+        start.set(Calendar.MINUTE, splitTime[1].toInt())
+
+        val currentTime = Calendar.getInstance()
+
+        val startDayNumber = start.time
+        val currentDayNumber = currentTime.time
+        if (startDayNumber < currentDayNumber) {
+            start.set(Calendar.WEEK_OF_YEAR, start.get(Calendar.WEEK_OF_YEAR) + 1)
+        }
+
+        val remainingTime = if (currentTime.timeInMillis < start.timeInMillis) {
+            DateUtils.getRelativeTimeSpanString(
+                start.timeInMillis,
+                currentTime.timeInMillis,
+                DateUtils.SECOND_IN_MILLIS
+            ).toString()
+        } else {
+            DateUtils.getRelativeTimeSpanString(
+                currentTime.timeInMillis,
+                start.timeInMillis,
+                DateUtils.DAY_IN_MILLIS
+            ).toString()
+        }
+
+        return "($remainingTime)"
     }
 }
 

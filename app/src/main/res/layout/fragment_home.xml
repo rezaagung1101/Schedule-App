@@ -93,13 +93,22 @@
                     android:id="@+id/tv_nearest_schedule_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/textPrimary"
                     android:fontFamily="@font/semi_bold_poppins"
                     android:text="@string/schedule_name"/>
                 <TextView
                     android:id="@+id/tv_nearest_schedule_time"
+                    android:textColor="@color/textPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/time_default"/>
+                <TextView
+                    android:id="@+id/tv_nearest_schedule_day"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/grey"
+                    android:textStyle="italic"
+                    android:layout_height="wrap_content"
+                    android:text="@string/day_default"/>
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>

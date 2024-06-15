@@ -80,22 +80,34 @@ class HomeFragment : Fragment() {
             }
         }
         requestLocationUpdates(requireContext())
+        showNearestSchedule()
         setupInformation(requireContext())
     }
 
-    private fun checkQuery(listSchedule: List<Schedule>?) {
-        if (listSchedule != null) {
-            scheduleViewModel.setQueryType(queryType)
-            //langsung get nearest dari viewmodel
-            scheduleViewModel.apply {
-                setQueryType(queryType)
-                getNearestSchedule()?.observe(viewLifecycleOwner){
-                    if(it!=null){
-                        binding.tvNearestScheduleTitle.text = it.scheduleName
-                        binding.tvNearestScheduleTime.text = "${it.startTime}-${it.endTime}"
-                    }
+    private fun showNearestSchedule() {
+        scheduleViewModel.apply {
+            getNearestSchedule()?.observe(viewLifecycleOwner) {
+                checkQuery(it)
+                if (it != null) {
+                    val remainingTime = Helper.timeDifference(it.day, it.startTime)
+                    binding.tvNearestScheduleTitle.text = it.scheduleName
+                    binding.tvNearestScheduleTime.text = "${it.startTime}-${it.endTime}"
+                    binding.tvNearestScheduleDay.text = if (remainingTime == "(In 7 days)") "Today"
+                    else remainingTime
                 }
             }
+        }
+    }
+
+    private fun checkQuery(schedule: Schedule?){
+        if (schedule == null) {
+            val newQueryType: QueryType = when (queryType) {
+                QueryType.CURRENT_DAY -> QueryType.NEXT_DAY
+                QueryType.NEXT_DAY -> QueryType.PAST_DAY
+                else -> QueryType.CURRENT_DAY
+            }
+            scheduleViewModel.setQueryType(newQueryType)
+            queryType = newQueryType
         }
     }
 
@@ -139,7 +151,6 @@ class HomeFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             binding.rvSchedule.layoutManager = layoutManager
             binding.rvSchedule.adapter = ListScheduleAdapter(it)
-            checkQuery(it)
         }
         binding.swipeRefresh.setOnRefreshListener {
             setupInformation(context)
