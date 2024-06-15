@@ -27,6 +27,9 @@ class DetailDayActivity : AppCompatActivity() {
         viewModel.getScheduleByDay(day).observe(this){
             setupInformation(it)
         }
+        binding.btnBack.setOnClickListener {
+            super.onBackPressed()
+        }
     }
 
     private fun setupInformation(listSchedule: List<Schedule>) {

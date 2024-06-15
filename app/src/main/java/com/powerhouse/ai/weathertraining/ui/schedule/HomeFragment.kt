@@ -80,8 +80,8 @@ class HomeFragment : Fragment() {
             }
         }
         requestLocationUpdates(requireContext())
-        setupInformation(requireContext())
         showNearestSchedule()
+        setupInformation(requireContext())
     }
 
     private fun showNearestSchedule() {

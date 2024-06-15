@@ -41,6 +41,9 @@ class DetailScheduleActivity : AppCompatActivity() {
             tvScheduleName.text = schedule.scheduleName
             tvTime.text = "${schedule.startTime}-${schedule.endTime}"
             tvNote.text = schedule.note.ifEmpty { "-" }
+            btnBack.setOnClickListener {
+                onBackPressed()
+            }
         }
 
     }

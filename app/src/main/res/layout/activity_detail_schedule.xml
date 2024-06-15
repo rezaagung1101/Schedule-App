@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/fab_margin"
     tools:context=".ui.schedule.DetailScheduleActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -18,6 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,9 +84,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="34dp"
                 android:textSize="16sp"
-                tools:text="@tools:sample/lorem/random" />
-
+                tools:text="@string/default_value" />
         </LinearLayout>
 
     </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/semi_bold_poppins"
+        android:padding="8dp"
+        android:text="@string/back"
+        android:textColor="@color/blue_dark"
+        android:textStyle="bold"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/blue_dark"
+        app:strokeWidth="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

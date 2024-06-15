@@ -15,30 +15,31 @@
         android:layout_margin="8dp">
 
         <ImageView
-            android:backgroundTint="@color/textPrimary"
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:backgroundTint="@color/textPrimary"
             android:src="@drawable/ic_time"
             app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
-            android:textColor="@color/textPrimary"
+            android:layout_marginLeft="@dimen/fab_margin"
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_default"
+            android:textColor="@color/textPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/view"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
+            android:layout_marginLeft="@dimen/fab_margin"
             android:id="@+id/view"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="-64dp"
             android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/tv_time" />
 
         <TextView
             android:id="@+id/tv_schedule_name"
